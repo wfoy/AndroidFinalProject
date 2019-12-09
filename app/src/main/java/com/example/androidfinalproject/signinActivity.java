@@ -32,6 +32,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class signinActivity extends AppCompatActivity {
@@ -62,11 +63,13 @@ public class signinActivity extends AppCompatActivity {
             @Override
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
+                //updateUI(null);
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
+                //updateUI(null);
             }
         });
     }
@@ -82,7 +85,6 @@ public class signinActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Pass the activity result back to the Facebook SDK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
@@ -110,6 +112,8 @@ public class signinActivity extends AppCompatActivity {
                     }
                 });
     }
+
+
 
 
 }

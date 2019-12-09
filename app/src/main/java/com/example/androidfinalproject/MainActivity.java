@@ -1,6 +1,8 @@
 package com.example.androidfinalproject;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //AppEventsLogger.activateApp(getApplication());
         mUsername = ANONYMOUS;
 
         // Initialize Firebase Auth
@@ -32,7 +33,8 @@ public class MainActivity extends AppCompatActivity {
             // Not signed in, launch the Sign In activity
             startActivity(new Intent(this, signinActivity.class));
             finish();
-            Toast.makeText(getApplicationContext(),"USER SIGNED IN 1",Toast.LENGTH_SHORT).show();
+            mUsername = mFirebaseUser.getDisplayName();
+            Toast.makeText(getApplicationContext(),"USER SIGNED IN 1 as " + mUsername,Toast.LENGTH_SHORT).show();
             return;
         } else {
             mUsername = mFirebaseUser.getDisplayName();
