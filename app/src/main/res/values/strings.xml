@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">AndroidFinalProject</string>
-    <string name="title_activity_signin">signinActivity</string>
-    <string name="facebook_app_id">2919240778088044</string>
-    <string name="fb_login_protocol_scheme">fb2919240778088044</string>
-</resources>
