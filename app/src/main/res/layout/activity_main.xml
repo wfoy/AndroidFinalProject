@@ -6,13 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/list_view"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="98dp" >
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/list_view"
+        app:layout_constraintStart_toStartOf="@id/list_view"
+        android:layout_marginLeft="10dp"/>
 
-    </ListView>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/list_view"
+        app:layout_constraintEnd_toEndOf="@id/list_view"
+        android:layout_marginRight="10dp"/>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="580dp"
+        tools:layout_editor_absoluteX="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"></ListView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_add"
+        app:backgroundTint="@android:color/holo_blue_dark"
+        app:borderWidth="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
