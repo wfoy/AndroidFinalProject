@@ -52,22 +52,11 @@ public class MainActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
         mFirebaseUser = mFirebaseAuth.getCurrentUser();
-        if (mFirebaseUser == null) {
-            // Not signed in, launch the Sign In activity
-            startActivity(new Intent(this, signinActivity.class));
-            return;
-        } else {
-            mUsername = mFirebaseUser.getDisplayName();
-            TextView userid = (TextView)findViewById(R.id.textView);
-            userid.setText("Logged in as " + mUsername);
-            mUseremail = mFirebaseUser.getEmail();
-            TextView userem = (TextView)findViewById(R.id.textView2);
-            userem.setText(mUseremail);
-        }
+        getCreds();
 
         //if notes already exist
         if(fileExists("__LATS__")) {
-            String[] entries = open("__LATS__").split(" ", 0);
+            String[] entries = open("__LATS__").split("@");
             for(int j = 0; j < entries.length; j++)
             {
                 if(entries[j] != null && !entries[j].isEmpty() && !entries[j].equals("") && !entries[j].equals(" ")) {
@@ -87,16 +76,16 @@ public class MainActivity extends AppCompatActivity {
         final ListView listView = (ListView) findViewById(R.id.list_view);
         listView.setAdapter(itemsAdapter);
 
-        FloatingActionButton button = findViewById(R.id.button); //add note
+        FloatingActionButton button = findViewById(R.id.button); //add location
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LocationEntry.class);
-                intent.putExtra("Title", "Note" + Integer.toString(notes.size()));
+                intent.putExtra("Title", "Location " + Integer.toString(notes.size()));
                 MainActivity.this.startActivityForResult(intent, REQUEST_CODE);
             }
         });
 
-        listView.setClickable(true);//click on note
+        listView.setClickable(true);//click on location
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
@@ -161,16 +150,19 @@ public class MainActivity extends AppCompatActivity {
         return content;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mUsername = mFirebaseUser.getDisplayName();
-        Toast.makeText(getApplicationContext(),"USER SIGNED IN 2 as " + mUsername,Toast.LENGTH_SHORT).show();
-        TextView userid = (TextView)findViewById(R.id.textView);
-        userid.setText("Logged in as " + mUsername);
-        mUseremail = mFirebaseUser.getEmail();
-        TextView userem = (TextView)findViewById(R.id.textView2);
-        userem.setText(mUseremail);
+    private void getCreds() {
+        if (mFirebaseUser == null) {
+            // Not signed in, launch the Sign In activity
+            startActivity(new Intent(this, signinActivity.class));
+            return;
+        } else {
+            mUsername = mFirebaseUser.getDisplayName();
+            TextView userid = (TextView)findViewById(R.id.textView);
+            userid.setText("Logged in as " + mUsername);
+            mUseremail = mFirebaseUser.getEmail();
+            TextView userem = (TextView)findViewById(R.id.textView2);
+            userem.setText(mUseremail);
+        }
     }
 
     @Override
@@ -217,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
         String toSave = "";
         for(int i = 0; i < notes.size(); i++)
         {
-            toSave += notes.get(i) + " ";
+            toSave += notes.get(i) + "@";
         }
 
         save("__LATS__", toSave);//save string of titles to __NOTES__ file

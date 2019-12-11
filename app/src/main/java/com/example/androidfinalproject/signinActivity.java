@@ -87,7 +87,7 @@ public class signinActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            //Toast.makeText(signinActivity.this, "Authentication Succeeded", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(signinActivity.this, "Authentication Succeeded", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -97,6 +97,7 @@ public class signinActivity extends AppCompatActivity {
                         }
                     }
                 });
+        Toast.makeText(signinActivity.this, "Done Log in", Toast.LENGTH_SHORT).show();
         finish();
     }
 
